@@ -1,0 +1,10 @@
+----------------------------------------------------------------
+Fri Mar 27 11:23:23 PDT 2015:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.9.1.0 - (1344872): instance a816c00e-014c-5c79-6975-00000a4eaf00 
+on database directory /Users/cam156/worthwhile_demo/jetty/fedora/test/derby/fedora3  with class loader WebAppClassLoader=Fedora Repository Server@3387ab0 
+Loaded from file:/private/var/folders/fb/d94r7kdj52b2pqxl7h876mjw0000gp/T/jetty-0.0.0.0-8983-fedora.war-_fedora-test-any-/webapp/WEB-INF/lib/derby-10.9.1.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_20-b26
+user.dir=/Users/cam156/worthwhile_demo/jetty
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

@@ -1,0 +1,927 @@
+BrowseEverything is not installed
+BrowseEverything is not installed
+BrowseEverything is not installed
+BrowseEverything is not installed
+BrowseEverything is not installed
+  [1m[36m (0.9ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (0.7ms)[0m  CREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to DeviseCreateUsers (20140930184422)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.4ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255) DEFAULT '' NOT NULL, "encrypted_password" varchar(255) DEFAULT '' NOT NULL, "reset_password_token" varchar(255), "reset_password_sent_at" datetime, "remember_created_at" datetime, "sign_in_count" integer DEFAULT 0 NOT NULL, "current_sign_in_at" datetime, "last_sign_in_at" datetime, "current_sign_in_ip" varchar(255), "last_sign_in_ip" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (1.0ms)[0m  CREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")
+  [1m[36m (0.1ms)[0m  [1mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140930184422"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to AddDeviseGuestsToUsers (20140930184425)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "guest" boolean DEFAULT 'f'[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140930184425"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateSearches (20140930184427)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "searches" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "query_params" text, "user_id" integer, "user_type" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "index_searches_on_user_id" ON "searches" ("user_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140930184427"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+Migrating to CreateBookmarks (20140930184428)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "bookmarks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer NOT NULL, "user_type" varchar(255), "document_id" varchar(255), "title" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140930184428"]]
+  [1m[35m (0.4ms)[0m  commit transaction
+Migrating to AddPolymorphicTypeToBookmarks (20140930184429)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "bookmarks" ADD "document_type" varchar(255)
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "index_bookmarks_on_user_id" ON "bookmarks" ("user_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140930184429"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to ActsAsFollowerMigration (20140930184430)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "follows" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "followable_id" integer NOT NULL, "followable_type" varchar(255) NOT NULL, "follower_id" integer NOT NULL, "follower_type" varchar(255) NOT NULL, "blocked" boolean DEFAULT 'f' NOT NULL, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "fk_follows" ON "follows" ("follower_id", "follower_type")
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "fk_followables" ON "follows" ("followable_id", "followable_type")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140930184430"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to AddSocialToUsers (20140930184431)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "facebook_handle" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "twitter_handle" varchar(255)
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "googleplus_handle" varchar(255)[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140930184431"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateSingleUseLinks (20140930184432)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "single_use_links" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "downloadKey" varchar(255), "path" varchar(255), "itemId" varchar(255), "expires" datetime, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140930184432"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to AddLdapAttrsToUser (20140930184433)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "display_name" varchar(255)[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "address" varchar(255)
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "admin_area" varchar(255)[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "department" varchar(255)
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "title" varchar(255)[0m
+  [1m[35m (0.2ms)[0m  ALTER TABLE "users" ADD "office" varchar(255)
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "chat_id" varchar(255)[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "website" varchar(255)
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "affiliation" varchar(255)[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "telephone" varchar(255)
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140930184433"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+Migrating to AddAvatarsToUsers (20140930184434)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "users" ADD "avatar_file_name" varchar(255)
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "avatar_content_type" varchar(255)[0m
+  [1m[35m (0.1ms)[0m  ALTER TABLE "users" ADD "avatar_file_size" integer
+  [1m[36m (0.1ms)[0m  [1mALTER TABLE "users" ADD "avatar_updated_at" datetime[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140930184434"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreateChecksumAuditLogs (20140930184435)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "checksum_audit_logs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "pid" varchar(255), "dsid" varchar(255), "version" varchar(255), "pass" integer, "expected_result" varchar(255), "actual_result" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "by_pid_and_dsid" ON "checksum_audit_logs" ("pid", "dsid")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140930184435"]]
+  [1m[35m (0.6ms)[0m  commit transaction
+Migrating to CreateVersionCommitters (20140930184436)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "version_committers" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "obj_id" varchar(255), "datastream_id" varchar(255), "version_id" varchar(255), "committer_login" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140930184436"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+Migrating to AddGroupsToUsers (20140930184437)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "users" ADD "group_list" text
+  [1m[36m (0.2ms)[0m  [1mALTER TABLE "users" ADD "groups_last_update" datetime[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140930184437"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateLocalAuthorities (20140930184438)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "local_authority_entries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "local_authority_id" integer, "label" varchar(255), "uri" varchar(255)) [0m
+  [1m[35m (0.1ms)[0m  CREATE TABLE "local_authorities" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255)) 
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "domain_terms" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "model" varchar(255), "term" varchar(255)) [0m
+  [1m[35m (0.1ms)[0m  CREATE TABLE "domain_terms_local_authorities" ("domain_term_id" integer, "local_authority_id" integer) 
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "subject_local_authority_entries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "label" varchar(255), "lowerLabel" varchar(255), "url" varchar(255)) [0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "entries_by_term_and_label" ON "local_authority_entries" ("local_authority_id", "label")
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "entries_by_term_and_uri" ON "local_authority_entries" ("local_authority_id", "uri")[0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "terms_by_model_and_term" ON "domain_terms" ("model", "term")
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "dtla_by_ids1" ON "domain_terms_local_authorities" ("local_authority_id", "domain_term_id")[0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "dtla_by_ids2" ON "domain_terms_local_authorities" ("domain_term_id", "local_authority_id")
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "entries_by_lower_label" ON "subject_local_authority_entries" ("lowerLabel")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140930184438"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+Migrating to CreateTrophies (20140930184439)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "trophies" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "generic_file_id" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140930184439"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to AddLinkedinToUsers (20140930184440)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mALTER TABLE "users" ADD "linkedin_handle" varchar(255)[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140930184440"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateTinymceAssets (20140930184441)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "tinymce_assets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "file" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140930184441"]]
+  [1m[36m (0.7ms)[0m  [1mcommit transaction[0m
+Migrating to CreateContentBlocks (20140930184442)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.2ms)[0m  [1mCREATE TABLE "content_blocks" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "value" text, "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35m (0.3ms)[0m  CREATE UNIQUE INDEX "index_content_blocks_on_name" ON "content_blocks" ("name")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140930184442"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to CreateFeaturedWorks (20140930184443)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE TABLE "featured_works" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "order" integer DEFAULT 5, "generic_file_id" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "index_featured_works_on_generic_file_id" ON "featured_works" ("generic_file_id")[0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "index_featured_works_on_order" ON "featured_works" ("order")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140930184443"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Migrating to CreateMailboxer (20140930184445)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "mailboxer_conversations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "subject" varchar(255) DEFAULT '', "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) 
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "mailboxer_receipts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "receiver_id" integer, "receiver_type" varchar(255), "notification_id" integer NOT NULL, "is_read" boolean DEFAULT 'f', "trashed" boolean DEFAULT 'f', "deleted" boolean DEFAULT 'f', "mailbox_type" varchar(25), "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  CREATE TABLE "mailboxer_notifications" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "type" varchar(255), "body" text, "subject" varchar(255) DEFAULT '', "sender_id" integer, "sender_type" varchar(255), "conversation_id" integer, "draft" boolean DEFAULT 'f', "notification_code" varchar(255), "notified_object_id" integer, "notified_object_type" varchar(255), "attachment" varchar(255), "updated_at" datetime NOT NULL, "created_at" datetime NOT NULL, "global" boolean DEFAULT 'f', "expires" datetime) 
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "index_mailboxer_receipts_on_notification_id" ON "mailboxer_receipts" ("notification_id")[0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "index_mailboxer_notifications_on_conversation_id" ON "mailboxer_notifications" ("conversation_id")
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140930184445"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to AddConversationOptout (20140930184446)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "mailboxer_conversation_opt_outs" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "unsubscriber_id" integer, "unsubscriber_type" varchar(255), "conversation_id" integer) 
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140930184446"]]
+  [1m[35m (0.8ms)[0m  commit transaction
+Migrating to AddMissingIndices (20140930184447)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  CREATE INDEX "index_mailboxer_conversation_opt_outs_on_unsubscriber_id_type" ON "mailboxer_conversation_opt_outs" ("unsubscriber_id", "unsubscriber_type")
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "index_mailboxer_conversation_opt_outs_on_conversation_id" ON "mailboxer_conversation_opt_outs" ("conversation_id")[0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "index_mailboxer_notifications_on_type" ON "mailboxer_notifications" ("type")
+  [1m[36m (0.1ms)[0m  [1mCREATE INDEX "index_mailboxer_notifications_on_sender_id_and_sender_type" ON "mailboxer_notifications" ("sender_id", "sender_type")[0m
+  [1m[35m (0.1ms)[0m  CREATE INDEX "index_mailboxer_notifications_on_notified_object_id_and_type" ON "mailboxer_notifications" ("notified_object_id", "notified_object_type")
+  [1m[36m (0.2ms)[0m  [1mCREATE INDEX "index_mailboxer_receipts_on_receiver_id_and_receiver_type" ON "mailboxer_receipts" ("receiver_id", "receiver_type")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140930184447"]]
+  [1m[36m (0.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+BrowseEverything is not installed
+BrowseEverything is not installed
+ActiveFedora: loading fedora config from /Users/cam156/worthwhile_demo/config/fedora.yml
+ActiveFedora: loading solr config from /Users/cam156/worthwhile_demo/config/solr.yml
+Using the default predicate_mappings.yml that comes with active-fedora.  If you want to override this, pass the path to predicate_mappings.yml to ActiveFedora - ie. ActiveFedora.init(:predicate_mappings_config_path => '/path/to/predicate_mappings.yml') - or set Rails.root and put predicate_mappings.yml into #{Rails.root}/config.
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."email" = 'cam156@psu.edu' LIMIT 1[0m
+  [1m[35mLocalAuthority Load (0.1ms)[0m  SELECT "local_authorities".* FROM "local_authorities" WHERE "local_authorities"."name" = 'lc_subjects' LIMIT 1
+  [1m[36mLocalAuthority Load (0.1ms)[0m  [1mSELECT "local_authorities".* FROM "local_authorities" WHERE "local_authorities"."name" = 'lexvo_languages' LIMIT 1[0m
+  [1m[35mLocalAuthority Load (0.1ms)[0m  SELECT "local_authorities".* FROM "local_authorities" WHERE "local_authorities"."name" = 'lc_genres' LIMIT 1
+ActiveFedora: loading fedora config from /Users/cam156/worthwhile_demo/config/fedora.yml
+ActiveFedora: loading solr config from /Users/cam156/worthwhile_demo/config/solr.yml
+Using the default predicate_mappings.yml that comes with active-fedora.  If you want to override this, pass the path to predicate_mappings.yml to ActiveFedora - ie. ActiveFedora.init(:predicate_mappings_config_path => '/path/to/predicate_mappings.yml') - or set Rails.root and put predicate_mappings.yml into #{Rails.root}/config.
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."email" = 'cam156@psu.edu' LIMIT 1[0m
+  [1m[35mLocalAuthority Load (0.1ms)[0m  SELECT "local_authorities".* FROM "local_authorities" WHERE "local_authorities"."name" = 'lc_subjects' LIMIT 1
+  [1m[36mLocalAuthority Load (0.1ms)[0m  [1mSELECT "local_authorities".* FROM "local_authorities" WHERE "local_authorities"."name" = 'lexvo_languages' LIMIT 1[0m
+  [1m[35mLocalAuthority Load (0.1ms)[0m  SELECT "local_authorities".* FROM "local_authorities" WHERE "local_authorities"."name" = 'lc_genres' LIMIT 1
+ActiveFedora: loading fedora config from /Users/cam156/worthwhile_demo/config/fedora.yml
+ActiveFedora: loading solr config from /Users/cam156/worthwhile_demo/config/solr.yml
+Using the default predicate_mappings.yml that comes with active-fedora.  If you want to override this, pass the path to predicate_mappings.yml to ActiveFedora - ie. ActiveFedora.init(:predicate_mappings_config_path => '/path/to/predicate_mappings.yml') - or set Rails.root and put predicate_mappings.yml into #{Rails.root}/config.
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."email" = 'cam156@psu.edu' LIMIT 1[0m
+  [1m[35mLocalAuthority Load (0.1ms)[0m  SELECT "local_authorities".* FROM "local_authorities" WHERE "local_authorities"."name" = 'lc_subjects' LIMIT 1
+  [1m[36mLocalAuthority Load (0.1ms)[0m  [1mSELECT "local_authorities".* FROM "local_authorities" WHERE "local_authorities"."name" = 'lexvo_languages' LIMIT 1[0m
+  [1m[35mLocalAuthority Load (0.1ms)[0m  SELECT "local_authorities".* FROM "local_authorities" WHERE "local_authorities"."name" = 'lc_genres' LIMIT 1
+ActiveFedora: loading fedora config from /Users/cam156/worthwhile_demo/config/fedora.yml
+ActiveFedora: loading solr config from /Users/cam156/worthwhile_demo/config/solr.yml
+ActiveFedora: loading fedora config from /Users/cam156/worthwhile_demo/config/fedora.yml
+ActiveFedora: loading solr config from /Users/cam156/worthwhile_demo/config/solr.yml
+ActiveFedora: loading fedora config from /Users/cam156/worthwhile_demo/config/fedora.yml
+ActiveFedora: loading solr config from /Users/cam156/worthwhile_demo/config/solr.yml
+ActiveFedora: loading fedora config from /Users/cam156/worthwhile_demo/config/fedora.yml
+ActiveFedora: loading solr config from /Users/cam156/worthwhile_demo/config/solr.yml
+ActiveFedora: loading fedora config from /Users/cam156/worthwhile_demo/config/fedora.yml
+ActiveFedora: loading solr config from /Users/cam156/worthwhile_demo/config/solr.yml
+ActiveFedora: loading fedora config from /Users/cam156/worthwhile_demo/config/fedora.yml
+ActiveFedora: loading solr config from /Users/cam156/worthwhile_demo/config/solr.yml
+ActiveFedora: loading fedora config from /Users/cam156/worthwhile_demo/config/fedora.yml
+ActiveFedora: loading solr config from /Users/cam156/worthwhile_demo/config/solr.yml
+ActiveFedora: loading fedora config from /Users/cam156/worthwhile_demo/config/fedora.yml
+ActiveFedora: loading solr config from /Users/cam156/worthwhile_demo/config/solr.yml
+BrowseEverything is not installed
+BrowseEverything is not installed
+
+
+Started GET "/" for 127.0.0.1 at 2015-03-27 11:23:39 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by CatalogController#index as HTML
+Solr :rows parameter not set (by the user, configuration, or default solr parameters); using 10 rows by default
+Usergroups are ["public"]
+Solr parameters: {"facet.field"=>["human_readable_type_sim", "desc_metadata__creator_sim", "desc_metadata__tag_sim", "desc_metadata__subject_sim", "desc_metadata__language_sim", "desc_metadata__based_near_sim", "desc_metadata__publisher_sim", "file_format_sim", "{!ex=generic_type_sim_single}generic_type_sim"], "facet.query"=>[], "facet.pivot"=>[], "fq"=>["edit_access_group_ssim:public OR discover_access_group_ssim:public OR read_access_group_ssim:public"], "hl.fl"=>[], "qf"=>["desc_metadata__title_tesim", "desc_metadata__name_tesim"], "qt"=>"search", "rows"=>10, "spellcheck.q"=>nil, "facet"=>true, "f.desc_metadata__creator_sim.facet.limit"=>6, "f.desc_metadata__tag_sim.facet.limit"=>6, "f.desc_metadata__subject_sim.facet.limit"=>6, "f.desc_metadata__language_sim.facet.limit"=>6, "f.desc_metadata__based_near_sim.facet.limit"=>6, "f.desc_metadata__publisher_sim.facet.limit"=>6, "f.file_format_sim.facet.limit"=>6, "sort"=>"score desc, desc_metadata__date_uploaded_dtsi desc"}
+Solr query: {"facet.field"=>["human_readable_type_sim", "desc_metadata__creator_sim", "desc_metadata__tag_sim", "desc_metadata__subject_sim", "desc_metadata__language_sim", "desc_metadata__based_near_sim", "desc_metadata__publisher_sim", "file_format_sim", "{!ex=generic_type_sim_single}generic_type_sim"], "facet.query"=>[], "facet.pivot"=>[], "fq"=>["edit_access_group_ssim:public OR discover_access_group_ssim:public OR read_access_group_ssim:public", "(_query_:\"{!raw f=has_model_ssim}info:fedora/afmodel:ScholarlyPaper\" OR _query_:\"{!raw f=has_model_ssim}info:fedora/afmodel:GenericWork\" OR _query_:\"{!raw f=has_model_ssim}info:fedora/afmodel:Collection\")"], "hl.fl"=>[], "qf"=>["desc_metadata__title_tesim", "desc_metadata__name_tesim"], "qt"=>"search", "rows"=>10, "spellcheck.q"=>nil, "facet"=>true, "f.desc_metadata__creator_sim.facet.limit"=>6, "f.desc_metadata__tag_sim.facet.limit"=>6, "f.desc_metadata__subject_sim.facet.limit"=>6, "f.desc_metadata__language_sim.facet.limit"=>6, "f.desc_metadata__based_near_sim.facet.limit"=>6, "f.desc_metadata__publisher_sim.facet.limit"=>6, "f.file_format_sim.facet.limit"=>6, "sort"=>"score desc, desc_metadata__date_uploaded_dtsi desc"}
+Solr fetch (140.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/catalog/_navbar.html.erb (3.9ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/catalog/_facets.html.erb (0.6ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/catalog/_search_sidebar.html.erb (3.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/catalog/_home_text.html.erb (0.4ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/catalog/_home.html.erb (2.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/catalog/index.html.erb within layouts/curate_nd/catalog (45.8ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_brand_bar.html.erb (0.4ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_search.html.erb (1.3ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_actions.html.erb (0.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_title_bar.html.erb (5.4ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_header.html.erb (9.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_flash_message.html.erb (0.6ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_footer.html.erb (0.3ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_ga.html.erb (0.6ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/shared/_ajax_modal.html.erb (0.3ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/boilerplate.html.erb (3644.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/curate_nd.html.erb (3660.2ms)
+Completed 200 OK in 4097ms (Views: 3719.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/assets/worthwhile.css?body=1" for 127.0.0.1 at 2015-03-27 11:23:43 -0700
+
+
+Started GET "/assets/blacklight.css?body=1" for 127.0.0.1 at 2015-03-27 11:23:43 -0700
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:43 -0700
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2015-03-27 11:23:43 -0700
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:43 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:43 -0700
+
+
+Started GET "/assets/blacklight/autofocus.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/blacklight/core.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/blacklight/checkbox_submit.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/blacklight/bookmark_toggle.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/blacklight/ajax_modal.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/blacklight/search_context.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/blacklight/collapsable.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/handlebars.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/bootstrap/alert.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/jquery-ui-1.9.2/jquery.ui.core.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/bootstrap/modal.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/blacklight/blacklight.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/jquery-ui-1.9.2/jquery.ui.widget.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/jquery-ui-1.9.2/jquery.ui.menu.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/jquery.tokeninput.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/worthwhile/manage_repeating_fields.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/jquery-ui-1.9.2/jquery.ui.autocomplete.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/bootstrap/button.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/jquery-ui-1.9.2/jquery.ui.position.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/bootstrap/tab.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/bootstrap/popover.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/worthwhile/help_modal.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/worthwhile/select_works.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/worthwhile/link_users.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/worthwhile/link_groups.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/worthwhile/proxy_rights.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/worthwhile/facet_mine.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/worthwhile/accept_contributor_agreement.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/worthwhile/proxy_submission.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/worthwhile/embargoes.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/worthwhile/worthwhile.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/worthwhile/application.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/worthwhile.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/assets/bootstrap/glyphicons-halflings-regular.woff" for 127.0.0.1 at 2015-03-27 11:23:44 -0700
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2015-03-27 11:23:48 -0700
+Processing by Devise::SessionsController#new as HTML
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/devise-3.3.0/app/views/devise/shared/_links.erb (1.3ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/devise-3.3.0/app/views/devise/sessions/new.html.erb within layouts/curate_nd/1_column (21.3ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_brand_bar.html.erb (0.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_search.html.erb (0.8ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_actions.html.erb (0.3ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_title_bar.html.erb (3.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_header.html.erb (5.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_flash_message.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_footer.html.erb (0.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_ga.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/shared/_ajax_modal.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/boilerplate.html.erb (16.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/curate_nd.html.erb (24.9ms)
+Completed 200 OK in 54ms (Views: 50.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-03-27 11:24:01 -0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QhNjhv9mIpQGPsuh44IJ/W7iUm1/TK3dmztDGk2dWbY=", "user"=>{"email"=>"cam156@psu.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT "users".* FROM "users" WHERE "users"."email" = 'cam156@psu.edu' ORDER BY "users"."id" ASC LIMIT 1
+Completed 401 Unauthorized in 6ms
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QhNjhv9mIpQGPsuh44IJ/W7iUm1/TK3dmztDGk2dWbY=", "user"=>{"email"=>"cam156@psu.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/devise-3.3.0/app/views/devise/shared/_links.erb (0.3ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/devise-3.3.0/app/views/devise/sessions/new.html.erb within layouts/curate_nd/1_column (2.9ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_brand_bar.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_search.html.erb (0.9ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_actions.html.erb (0.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_title_bar.html.erb (3.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_header.html.erb (5.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_flash_message.html.erb (3.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_footer.html.erb (0.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_ga.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/shared/_ajax_modal.html.erb (0.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/boilerplate.html.erb (16.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/curate_nd.html.erb (28.7ms)
+Completed 200 OK in 95ms (Views: 34.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:01 -0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:01 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:01 -0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:01 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:01 -0700
+
+
+Started GET "/assets/worthwhile/proxy_rights.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:01 -0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:01 -0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:01 -0700
+
+
+Started GET "/assets/worthwhile/proxy_rights.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:01 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:01 -0700
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2015-03-27 11:24:06 -0700
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QhNjhv9mIpQGPsuh44IJ/W7iUm1/TK3dmztDGk2dWbY=", "user"=>{"email"=>"cam156@psu.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."email" = 'cam156@psu.edu' ORDER BY "users"."id" ASC LIMIT 1[0m
+Completed 401 Unauthorized in 2ms
+Processing by Devise::SessionsController#new as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QhNjhv9mIpQGPsuh44IJ/W7iUm1/TK3dmztDGk2dWbY=", "user"=>{"email"=>"cam156@psu.edu", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/devise-3.3.0/app/views/devise/shared/_links.erb (0.3ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/devise-3.3.0/app/views/devise/sessions/new.html.erb within layouts/curate_nd/1_column (2.8ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_brand_bar.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_search.html.erb (0.9ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_actions.html.erb (0.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_title_bar.html.erb (3.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_header.html.erb (5.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_flash_message.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_footer.html.erb (0.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_ga.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/shared/_ajax_modal.html.erb (0.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/boilerplate.html.erb (15.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/curate_nd.html.erb (24.6ms)
+Completed 200 OK in 91ms (Views: 30.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:06 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:06 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:06 -0700
+
+
+Started GET "/assets/worthwhile/proxy_rights.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:06 -0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:06 -0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:06 -0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:06 -0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:06 -0700
+
+
+Started GET "/assets/worthwhile/proxy_rights.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:06 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:06 -0700
+
+
+Started GET "/users/sign_up" for 127.0.0.1 at 2015-03-27 11:24:10 -0700
+Processing by Devise::RegistrationsController#new as HTML
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/devise-3.3.0/app/views/devise/shared/_links.erb (0.4ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/devise-3.3.0/app/views/devise/registrations/new.html.erb within layouts/curate_nd/1_column (13.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_brand_bar.html.erb (0.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_search.html.erb (0.8ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_actions.html.erb (0.4ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_title_bar.html.erb (3.3ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_header.html.erb (5.6ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_flash_message.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_footer.html.erb (0.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_ga.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/shared/_ajax_modal.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/boilerplate.html.erb (16.5ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/curate_nd.html.erb (26.0ms)
+Completed 200 OK in 44ms (Views: 42.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:10 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:10 -0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:10 -0700
+
+
+Started GET "/assets/worthwhile/proxy_rights.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:10 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:10 -0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:10 -0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:10 -0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:10 -0700
+
+
+Started GET "/assets/worthwhile/proxy_rights.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:10 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:10 -0700
+
+
+Started POST "/users" for 127.0.0.1 at 2015-03-27 11:24:20 -0700
+Processing by Devise::RegistrationsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QhNjhv9mIpQGPsuh44IJ/W7iUm1/TK3dmztDGk2dWbY=", "user"=>{"email"=>"cam@psu.edu", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "commit"=>"Sign up"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mUser Exists (0.1ms)[0m  [1mSELECT 1 AS one FROM "users" WHERE "users"."email" = 'cam@psu.edu' LIMIT 1[0m
+Binary data inserted for `string` type on column `encrypted_password`
+  [1m[35mSQL (6.3ms)[0m  INSERT INTO "users" ("created_at", "email", "encrypted_password", "updated_at") VALUES (?, ?, ?, ?)  [["created_at", Fri, 27 Mar 2015 18:24:20 UTC +00:00], ["email", "cam@psu.edu"], ["encrypted_password", "$2a$10$gTGFAziwWeIloDMZqjONMuCeaimDr42BlBqAraLpiO1xy7Nn9ZG/K"], ["updated_at", Fri, 27 Mar 2015 18:24:20 UTC +00:00]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  begin transaction
+Binary data inserted for `string` type on column `last_sign_in_ip`
+Binary data inserted for `string` type on column `current_sign_in_ip`
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE "users" SET "last_sign_in_at" = ?, "current_sign_in_at" = ?, "last_sign_in_ip" = ?, "current_sign_in_ip" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = 1[0m  [["last_sign_in_at", Fri, 27 Mar 2015 18:24:20 UTC +00:00], ["current_sign_in_at", Fri, 27 Mar 2015 18:24:20 UTC +00:00], ["last_sign_in_ip", "127.0.0.1"], ["current_sign_in_ip", "127.0.0.1"], ["sign_in_count", 1], ["updated_at", Fri, 27 Mar 2015 18:24:20 UTC +00:00]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Redirected to http://localhost:3000/
+Completed 302 Found in 96ms (ActiveRecord: 8.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2015-03-27 11:24:20 -0700
+Processing by CatalogController#index as HTML
+Solr :rows parameter not set (by the user, configuration, or default solr parameters); using 10 rows by default
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Usergroups are ["public", "registered"]
+  [1m[35mLocalAuthority Load (0.1ms)[0m  SELECT "local_authorities".* FROM "local_authorities" WHERE "local_authorities"."name" = 'lc_subjects' LIMIT 1
+  [1m[36mLocalAuthority Load (0.1ms)[0m  [1mSELECT "local_authorities".* FROM "local_authorities" WHERE "local_authorities"."name" = 'lexvo_languages' LIMIT 1[0m
+  [1m[35mLocalAuthority Load (0.1ms)[0m  SELECT "local_authorities".* FROM "local_authorities" WHERE "local_authorities"."name" = 'lc_genres' LIMIT 1
+Solr parameters: {"facet.field"=>["human_readable_type_sim", "desc_metadata__creator_sim", "desc_metadata__tag_sim", "desc_metadata__subject_sim", "desc_metadata__language_sim", "desc_metadata__based_near_sim", "desc_metadata__publisher_sim", "file_format_sim", "{!ex=generic_type_sim_single}generic_type_sim"], "facet.query"=>[], "facet.pivot"=>[], "fq"=>["edit_access_group_ssim:public OR discover_access_group_ssim:public OR read_access_group_ssim:public OR edit_access_group_ssim:registered OR discover_access_group_ssim:registered OR read_access_group_ssim:registered OR edit_access_person_ssim:cam@psu.edu OR discover_access_person_ssim:cam@psu.edu OR read_access_person_ssim:cam@psu.edu"], "hl.fl"=>[], "qf"=>["desc_metadata__title_tesim", "desc_metadata__name_tesim"], "qt"=>"search", "rows"=>10, "spellcheck.q"=>nil, "facet"=>true, "f.desc_metadata__creator_sim.facet.limit"=>6, "f.desc_metadata__tag_sim.facet.limit"=>6, "f.desc_metadata__subject_sim.facet.limit"=>6, "f.desc_metadata__language_sim.facet.limit"=>6, "f.desc_metadata__based_near_sim.facet.limit"=>6, "f.desc_metadata__publisher_sim.facet.limit"=>6, "f.file_format_sim.facet.limit"=>6, "sort"=>"score desc, desc_metadata__date_uploaded_dtsi desc"}
+Solr query: {"facet.field"=>["human_readable_type_sim", "desc_metadata__creator_sim", "desc_metadata__tag_sim", "desc_metadata__subject_sim", "desc_metadata__language_sim", "desc_metadata__based_near_sim", "desc_metadata__publisher_sim", "file_format_sim", "{!ex=generic_type_sim_single}generic_type_sim"], "facet.query"=>[], "facet.pivot"=>[], "fq"=>["edit_access_group_ssim:public OR discover_access_group_ssim:public OR read_access_group_ssim:public OR edit_access_group_ssim:registered OR discover_access_group_ssim:registered OR read_access_group_ssim:registered OR edit_access_person_ssim:cam@psu.edu OR discover_access_person_ssim:cam@psu.edu OR read_access_person_ssim:cam@psu.edu", "(_query_:\"{!raw f=has_model_ssim}info:fedora/afmodel:ScholarlyPaper\" OR _query_:\"{!raw f=has_model_ssim}info:fedora/afmodel:GenericWork\" OR _query_:\"{!raw f=has_model_ssim}info:fedora/afmodel:Collection\")"], "hl.fl"=>[], "qf"=>["desc_metadata__title_tesim", "desc_metadata__name_tesim"], "qt"=>"search", "rows"=>10, "spellcheck.q"=>nil, "facet"=>true, "f.desc_metadata__creator_sim.facet.limit"=>6, "f.desc_metadata__tag_sim.facet.limit"=>6, "f.desc_metadata__subject_sim.facet.limit"=>6, "f.desc_metadata__language_sim.facet.limit"=>6, "f.desc_metadata__based_near_sim.facet.limit"=>6, "f.desc_metadata__publisher_sim.facet.limit"=>6, "f.file_format_sim.facet.limit"=>6, "sort"=>"score desc, desc_metadata__date_uploaded_dtsi desc"}
+Solr fetch (6.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/catalog/_navbar.html.erb (1.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/catalog/_facets.html.erb (0.3ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/catalog/_search_sidebar.html.erb (2.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/catalog/_home_text.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/catalog/_home.html.erb (1.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/catalog/index.html.erb within layouts/curate_nd/catalog (8.9ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_brand_bar.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_search.html.erb (0.8ms)
+User is cam@psu.edu
+try is ScholarlyPaper
+Usergroups are ["public", "registered"]
+can is  true
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_add_content.html.erb (8.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_my_actions.html.erb (1.5ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_actions.html.erb (13.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_title_bar.html.erb (16.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_header.html.erb (18.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_flash_message.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_footer.html.erb (0.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_ga.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/shared/_ajax_modal.html.erb (0.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/boilerplate.html.erb (15.3ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/curate_nd.html.erb (37.3ms)
+Completed 200 OK in 232ms (Views: 49.5ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:21 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:21 -0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:21 -0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:21 -0700
+
+
+Started GET "/assets/worthwhile/proxy_rights.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:21 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:21 -0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:21 -0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:21 -0700
+
+
+Started GET "/assets/worthwhile/proxy_rights.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:21 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-27 11:24:21 -0700
+
+
+Started GET "/classify_concerns/new" for 127.0.0.1 at 2015-03-27 11:24:43 -0700
+Processing by Worthwhile::ClassifyConcernsController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Usergroups are ["public", "registered"]
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/worthwhile/classify_concerns/new.html.erb within layouts/curate_nd/1_column (1.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_brand_bar.html.erb (0.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_search.html.erb (0.7ms)
+User is cam@psu.edu
+try is ScholarlyPaper
+Usergroups are ["public", "registered"]
+can is  true
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_add_content.html.erb (2.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_my_actions.html.erb (0.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_actions.html.erb (4.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_title_bar.html.erb (7.4ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_header.html.erb (9.3ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_flash_message.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_footer.html.erb (0.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_ga.html.erb (0.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/shared/_ajax_modal.html.erb (0.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/boilerplate.html.erb (16.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/curate_nd.html.erb (29.3ms)
+Completed 200 OK in 40ms (Views: 35.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/concern/generic_works/new" for 127.0.0.1 at 2015-03-27 11:24:57 -0700
+Processing by CurationConcern::GenericWorksController#new as HTML
+  [1m[35mUser Load (0.3ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Usergroups are ["public", "registered"]
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_required_information.html.erb (69.9ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_additional_information.html.erb (5.4ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_descriptive_fields.erb (91.8ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_files_and_links.html.erb (6.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_representative_image.html.erb (0.5ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_permission_embargo.html.erb (11.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_permission_lease.html.erb (4.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_permission.html.erb (48.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_content_license.html.erb (2.3ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_supplementary_fields.html.erb (88.4ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_legally_binding_text.html.erb (0.8ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_contributor_agreement.html.erb (9.6ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form.html.erb (269.6ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/new.html.erb within layouts/curate_nd/1_column (277.3ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_brand_bar.html.erb (0.4ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_search.html.erb (1.2ms)
+User is cam@psu.edu
+try is ScholarlyPaper
+Usergroups are ["public", "registered"]
+can is  true
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_add_content.html.erb (2.8ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_my_actions.html.erb (1.3ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_actions.html.erb (7.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_title_bar.html.erb (11.5ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_header.html.erb (14.9ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_flash_message.html.erb (0.6ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_footer.html.erb (0.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_ga.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/shared/_ajax_modal.html.erb (0.5ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/boilerplate.html.erb (18.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/curate_nd.html.erb (39.8ms)
+Completed 200 OK in 364ms (Views: 328.0ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/classify_concerns/new" for 127.0.0.1 at 2015-03-27 11:28:12 -0700
+Processing by Worthwhile::ClassifyConcernsController#new as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Usergroups are ["public", "registered"]
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/worthwhile/classify_concerns/new.html.erb within layouts/curate_nd/1_column (1.3ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_brand_bar.html.erb (0.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_search.html.erb (1.1ms)
+User is cam@psu.edu
+try is ScholarlyPaper
+Usergroups are ["public", "registered"]
+can is  true
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_add_content.html.erb (2.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_my_actions.html.erb (0.8ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_actions.html.erb (6.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_title_bar.html.erb (10.3ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_header.html.erb (12.8ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_flash_message.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_footer.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_ga.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/shared/_ajax_modal.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/boilerplate.html.erb (16.5ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/curate_nd.html.erb (34.5ms)
+Completed 200 OK in 47ms (Views: 40.1ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/concern/scholarly_papers/new" for 127.0.0.1 at 2015-03-27 11:28:16 -0700
+Processing by CurationConcern::ScholarlyPapersController#new as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Usergroups are ["public", "registered"]
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_required_information.html.erb (7.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_additional_information.html.erb (4.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_descriptive_fields.erb (28.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_files_and_links.html.erb (3.8ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_representative_image.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_permission_embargo.html.erb (6.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_permission_lease.html.erb (4.5ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_permission.html.erb (35.5ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_content_license.html.erb (2.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_supplementary_fields.html.erb (71.4ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_legally_binding_text.html.erb (0.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_contributor_agreement.html.erb (8.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form.html.erb (131.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/new.html.erb within layouts/curate_nd/1_column (138.9ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_brand_bar.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_search.html.erb (0.8ms)
+User is cam@psu.edu
+try is ScholarlyPaper
+Usergroups are ["public", "registered"]
+can is  true
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_add_content.html.erb (2.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_my_actions.html.erb (0.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_actions.html.erb (5.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_title_bar.html.erb (9.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_header.html.erb (12.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_flash_message.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_footer.html.erb (0.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_ga.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/shared/_ajax_modal.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/boilerplate.html.erb (16.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/curate_nd.html.erb (34.6ms)
+Completed 200 OK in 186ms (Views: 183.2ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/concern/scholarly_papers" for 127.0.0.1 at 2015-03-27 11:29:17 -0700
+Processing by CurationConcern::ScholarlyPapersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"QhNjhv9mIpQGPsuh44IJ/W7iUm1/TK3dmztDGk2dWbY=", "scholarly_paper"=>{"title"=>["dfsf"], "creator"=>[""], "contributor"=>[""], "description"=>[""], "subject"=>[""], "publisher"=>[""], "language"=>[""], "files"=>#<ActionDispatch::Http::UploadedFile:0x007ff435e57f50 @tempfile=#<Tempfile:/var/folders/fb/d94r7kdj52b2pqxl7h876mjw0000gp/T/RackMultipart20150327-53081-1jgoxj9>, @original_filename="PurceyAndNicholas.png", @content_type="image/png", @headers="Content-Disposition: form-data; name=\"scholarly_paper[files]\"; filename=\"PurceyAndNicholas.png\"\r\nContent-Type: image/png\r\n">, "linked_resource_urls"=>"", "visibility"=>"open", "visibility_during_embargo"=>"restricted", "embargo_release_date"=>"2015-03-28", "visibility_after_embargo"=>"open", "visibility_during_lease"=>"open", "lease_expiration_date"=>"2015-03-28", "visibility_after_lease"=>"restricted", "rights"=>""}, "accept_contributor_agreement"=>"accept", "commit"=>"Create Scholarly paper"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Usergroups are ["public", "registered"]
+ActiveFedora: loading fedora config from /Users/cam156/worthwhile_demo/config/fedora.yml
+ActiveFedora: loading solr config from /Users/cam156/worthwhile_demo/config/solr.yml
+Using the default predicate_mappings.yml that comes with active-fedora.  If you want to override this, pass the path to predicate_mappings.yml to ActiveFedora - ie. ActiveFedora.init(:predicate_mappings_config_path => '/path/to/predicate_mappings.yml') - or set Rails.root and put predicate_mappings.yml into #{Rails.root}/config.
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "version_committers" ("committer_login", "created_at", "datastream_id", "obj_id", "updated_at", "version_id") VALUES (?, ?, ?, ?, ?, ?)[0m  [["committer_login", "cam@psu.edu"], ["created_at", Fri, 27 Mar 2015 18:29:19 UTC +00:00], ["datastream_id", "content"], ["obj_id", "sufia:rb68zh89h"], ["updated_at", Fri, 27 Mar 2015 18:29:19 UTC +00:00], ["version_id", "content.0"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Redirected to http://localhost:3000/concern/scholarly_papers/rb68zh887
+Completed 302 Found in 2542ms (ActiveRecord: 1.9ms)
+
+
+Started GET "/concern/scholarly_papers/rb68zh887" for 127.0.0.1 at 2015-03-27 11:29:20 -0700
+Processing by CurationConcern::ScholarlyPapersController#show as HTML
+  Parameters: {"id"=>"rb68zh887"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Usergroups are ["public", "registered"]
+[CANCAN] Checking read permissions for user: cam@psu.edu with groups: ["public", "registered"]
+[CANCAN] edit_groups: []
+[CANCAN] read_groups: ["public"]
+Couldn't get mime_type out of solr, because the datastream 'FitsDatastream' doesn't respond to 'primary_solr_name'. Trying another way.
+Couldn't get mime_type out of solr, because the datastream 'FitsDatastream' doesn't respond to 'primary_solr_name'. Trying another way.
+Couldn't get mime_type out of solr, because the datastream 'FitsDatastream' doesn't respond to 'primary_solr_name'. Trying another way.
+Couldn't get mime_type out of solr, because the datastream 'FitsDatastream' doesn't respond to 'primary_solr_name'. Trying another way.
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/generic_files/_media_display.html.erb (6.9ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_representative_media.html.erb (44.5ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_attributes.html.erb (49.2ms)
+[CANCAN] Checking read permissions for user: cam@psu.edu with groups: ["public", "registered"]
+[CANCAN] edit_groups: []
+[CANCAN] read_groups: ["public"]
+[CANCAN] Checking edit permissions for user: cam@psu.edu with groups: ["public", "registered"]
+[CANCAN] edit_groups: []
+[CANCAN] edit_users: ["cam@psu.edu"]
+[CANCAN] decision: true
+[CANCAN] Checking edit permissions for user: cam@psu.edu with groups: ["public", "registered"]
+[CANCAN] edit_groups: []
+[CANCAN] edit_users: ["cam@psu.edu"]
+[CANCAN] decision: true
+[CANCAN] Checking read permissions for user: cam@psu.edu with groups: ["public", "registered"]
+[CANCAN] edit_groups: []
+[CANCAN] read_groups: ["public"]
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/worthwhile/generic_files/_actions.html.erb (3.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/worthwhile/generic_files/_generic_file.html.erb (113.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_related_files.html.erb (210.0ms)
+[CANCAN] Checking edit permissions for user: cam@psu.edu with groups: ["public", "registered"]
+[CANCAN] edit_groups: []
+[CANCAN] edit_users: ["cam@psu.edu"]
+[CANCAN] decision: true
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_related_resources.html.erb (7.6ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_collections.html.erb (3.2ms)
+[CANCAN] Checking edit permissions for user: cam@psu.edu with groups: ["public", "registered"]
+[CANCAN] edit_groups: []
+[CANCAN] edit_users: ["cam@psu.edu"]
+[CANCAN] decision: true
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curate/collections/_form_to_add_member.html.erb (5.6ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curate/collections/_add_to_collection_modal.html.erb (8.4ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/show.html.erb within layouts/curate_nd/1_column (431.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_brand_bar.html.erb (0.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_search.html.erb (0.8ms)
+User is cam@psu.edu
+try is ScholarlyPaper
+Usergroups are ["public", "registered"]
+can is  true
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_add_content.html.erb (2.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_my_actions.html.erb (0.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_actions.html.erb (4.8ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_title_bar.html.erb (7.6ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_header.html.erb (9.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_flash_message.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_footer.html.erb (0.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_ga.html.erb (0.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/shared/_ajax_modal.html.erb (0.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/boilerplate.html.erb (15.5ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/curate_nd.html.erb (29.1ms)
+Completed 200 OK in 538ms (Views: 467.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2015-03-27 11:29:20 -0700
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2015-03-27 11:29:20 -0700
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2015-03-27 11:29:20 -0700
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2015-03-27 11:29:20 -0700
+
+
+Started GET "/assets/worthwhile/proxy_rights.js?body=1" for 127.0.0.1 at 2015-03-27 11:29:20 -0700
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2015-03-27 11:29:20 -0700
+
+
+Started GET "/assets/default.png" for 127.0.0.1 at 2015-03-27 11:29:20 -0700
+
+
+Started GET "/downloads/rb68zh89h?datastream_id=thumbnail" for 127.0.0.1 at 2015-03-27 11:29:20 -0700
+Processing by DownloadsController#show as HTML
+  Parameters: {"datastream_id"=>"thumbnail", "id"=>"rb68zh89h"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Usergroups are ["public", "registered"]
+[CANCAN] Checking read permissions for user: cam@psu.edu with groups: ["public", "registered"]
+[CANCAN] edit_groups: []
+[CANCAN] read_groups: ["public"]
+  Rendered public/404.html (0.5ms)
+Completed 404 Not Found in 48ms (Views: 4.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/concern/container/rb68zh887/generic_files/new" for 127.0.0.1 at 2015-03-27 11:29:59 -0700
+Processing by CurationConcern::GenericFilesController#new as HTML
+  Parameters: {"parent_id"=>"rb68zh887"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1[0m
+Usergroups are ["public", "registered"]
+[CANCAN] Checking edit permissions for user: cam@psu.edu with groups: ["public", "registered"]
+[CANCAN] edit_groups: []
+[CANCAN] edit_users: ["cam@psu.edu"]
+[CANCAN] decision: true
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_permission_embargo.html.erb (6.5ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_permission_lease.html.erb (5.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/_form_permission.html.erb (35.4ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/generic_files/_form.html.erb (114.6ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/base/new.html.erb within layouts/curate_nd/1_column (117.3ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_brand_bar.html.erb (0.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_search.html.erb (0.8ms)
+User is cam@psu.edu
+try is ScholarlyPaper
+Usergroups are ["public", "registered"]
+can is  true
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_add_content.html.erb (2.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_my_actions.html.erb (0.8ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_actions.html.erb (5.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_title_bar.html.erb (9.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_header.html.erb (11.8ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_flash_message.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_footer.html.erb (0.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_ga.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/shared/_ajax_modal.html.erb (0.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/boilerplate.html.erb (14.8ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/curate_nd.html.erb (31.7ms)
+Completed 200 OK in 255ms (Views: 158.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/concern/container/rb68zh887/linked_resources/new" for 127.0.0.1 at 2015-03-27 11:31:40 -0700
+Processing by CurationConcern::LinkedResourcesController#new as HTML
+  Parameters: {"parent_id"=>"rb68zh887"}
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users" WHERE "users"."id" = 1 ORDER BY "users"."id" ASC LIMIT 1
+Usergroups are ["public", "registered"]
+[CANCAN] Checking edit permissions for user: cam@psu.edu with groups: ["public", "registered"]
+[CANCAN] edit_groups: []
+[CANCAN] edit_users: ["cam@psu.edu"]
+[CANCAN] decision: true
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/linked_resources/_form.html.erb (8.6ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/curation_concern/linked_resources/new.html.erb within layouts/curate_nd/1_column (139.2ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_brand_bar.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_search.html.erb (0.7ms)
+User is cam@psu.edu
+try is ScholarlyPaper
+Usergroups are ["public", "registered"]
+can is  true
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_add_content.html.erb (2.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_my_actions.html.erb (0.7ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_site_actions.html.erb (4.5ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_title_bar.html.erb (7.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_header.html.erb (9.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_flash_message.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_footer.html.erb (0.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/shared/_ga.html.erb (0.1ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/blacklight-5.7.1/app/views/shared/_ajax_modal.html.erb (0.0ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/boilerplate.html.erb (17.8ms)
+  Rendered /Users/cam156/.rbenv/versions/2.1.1/lib/ruby/gems/2.1.0/gems/worthwhile-0.0.3/app/views/layouts/curate_nd.html.erb (30.6ms)
+Completed 200 OK in 184ms (Views: 173.9ms | ActiveRecord: 0.2ms)

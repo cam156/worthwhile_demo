@@ -1,0 +1,120 @@
+[STATUS]
+Starting
+2014-09-30 14:45:54PM EDT
+Initializing Server
+[/STATUS]
+
+[STATUS]
+Starting
+2014-09-30 14:45:54PM EDT
+Fedora Version: 3.7.0
+[/STATUS]
+
+[STATUS]
+Starting
+2014-09-30 14:45:54PM EDT
+Fedora Build Date: 2013-09-14 01:09:27 UTC-0400
+[/STATUS]
+
+[STATUS]
+Starting
+2014-09-30 14:45:54PM EDT
+Server Host Name: localhost
+[/STATUS]
+
+[STATUS]
+Starting
+2014-09-30 14:45:54PM EDT
+Server Port: 8080
+[/STATUS]
+
+[STATUS]
+Starting
+2014-09-30 14:45:54PM EDT
+Initializing datastore definitions
+[/STATUS]
+
+[STATUS]
+Starting
+2014-09-30 14:45:54PM EDT
+Loading Module Definitions
+[/STATUS]
+
+[STATUS]
+Starting
+2014-09-30 14:45:54PM EDT
+Initializing Modules
+[/STATUS]
+
+[STATUS]
+Starting
+2014-09-30 14:45:55PM EDT
+Post-Initializing Modules
+[/STATUS]
+
+[STATUS]
+Starting
+2014-09-30 14:45:55PM EDT
+Initializing XACML Authorization Module
+[/STATUS]
+
+[STATUS]
+Starting
+2015-03-27 11:23:21AM PDT
+Initializing Server
+[/STATUS]
+
+[STATUS]
+Starting
+2015-03-27 11:23:21AM PDT
+Fedora Version: 3.7.0
+[/STATUS]
+
+[STATUS]
+Starting
+2015-03-27 11:23:21AM PDT
+Fedora Build Date: 2013-09-14 01:09:27 UTC-0400
+[/STATUS]
+
+[STATUS]
+Starting
+2015-03-27 11:23:21AM PDT
+Server Host Name: localhost
+[/STATUS]
+
+[STATUS]
+Starting
+2015-03-27 11:23:21AM PDT
+Server Port: 8080
+[/STATUS]
+
+[STATUS]
+Starting
+2015-03-27 11:23:21AM PDT
+Initializing datastore definitions
+[/STATUS]
+
+[STATUS]
+Starting
+2015-03-27 11:23:21AM PDT
+Loading Module Definitions
+[/STATUS]
+
+[STATUS]
+Starting
+2015-03-27 11:23:21AM PDT
+Initializing Modules
+[/STATUS]
+
+[STATUS]
+Starting
+2015-03-27 11:23:23AM PDT
+Post-Initializing Modules
+[/STATUS]
+
+[STATUS]
+Starting
+2015-03-27 11:23:23AM PDT
+Initializing XACML Authorization Module
+[/STATUS]
+

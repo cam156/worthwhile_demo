@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<rdf:RDF xmlns:ns0='info:fedora/fedora-system:def/model#' xmlns:rdf='http://www.w3.org/1999/02/22-rdf-syntax-ns#'>
+  <rdf:Description rdf:about='info:fedora/sufia:rb68zh887'>
+    <ns0:hasModel rdf:resource='info:fedora/afmodel:ScholarlyPaper' />
+  </rdf:Description>
+</rdf:RDF>

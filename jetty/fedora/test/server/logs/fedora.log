@@ -1,0 +1,255 @@
+INFO 2014-09-30 14:45:52.808 [main] (LogSetupContextListener) Configured Fedora Logback system with config file from: /Users/cam156/worthwhile_demo/jetty/fedora/test/server/config/logback.xml
+INFO 2014-09-30 14:45:53.892 [main] (Server) Registered server at /Users/cam156/worthwhile_demo/jetty/fedora/test/server
+INFO 2014-09-30 14:45:53.894 [main] (Server) loading spring beans from /Users/cam156/worthwhile_demo/jetty/fedora/test/server/config/spring/akubra-llstore.xml
+INFO 2014-09-30 14:45:53.913 [main] (Server) loading spring beans from /Users/cam156/worthwhile_demo/jetty/fedora/test/server/config/spring/doobjectvalidator.xml
+INFO 2014-09-30 14:45:53.934 [main] (Server) loading spring beans from /Users/cam156/worthwhile_demo/jetty/fedora/test/server/config/spring/doreader-cache.xml
+INFO 2014-09-30 14:45:53.950 [main] (Server) loading spring beans from /Users/cam156/worthwhile_demo/jetty/fedora/test/server/config/spring/policy-enforcement.xml
+INFO 2014-09-30 14:45:53.983 [main] (Server) loading spring beans from /Users/cam156/worthwhile_demo/jetty/fedora/test/server/config/spring/triple-generator.xml
+INFO 2014-09-30 14:45:53.998 [main] (Server) Server home is /Users/cam156/worthwhile_demo/jetty/fedora/test/server
+INFO 2014-09-30 14:45:54.024 [main] (BasicServer) Fedora Version: 3.7.0
+INFO 2014-09-30 14:45:54.024 [main] (BasicServer) Fedora Build Date: 2013-09-14 01:09:27 UTC-0400
+INFO 2014-09-30 14:45:54.026 [main] (Server) Loading fcfg datastore definitions for localMySQLPool
+INFO 2014-09-30 14:45:54.026 [main] (Server) Loading fcfg datastore definitions for localDerbyPool
+INFO 2014-09-30 14:45:54.026 [main] (Server) Loading fcfg datastore definitions for localOraclePool
+INFO 2014-09-30 14:45:54.026 [main] (Server) Loading fcfg datastore definitions for localPostgreSQLPool
+INFO 2014-09-30 14:45:54.026 [main] (Server) Loading fcfg datastore definitions for localMulgaraTriplestore
+INFO 2014-09-30 14:45:54.026 [main] (Server) Loading fcfg datastore definitions for localPostgresMPTTriplestore
+INFO 2014-09-30 14:45:54.026 [main] (Server) Loading fcfg datastore definitions for apimUpdateMessages
+INFO 2014-09-30 14:45:54.026 [main] (Server) Loading fcfg datastore definitions for apimAccessMessages
+INFO 2014-09-30 14:45:54.027 [main] (Server) Loading bean definitions for org.fcrepo.server.security.DefaultAuthorization impl class=org.fcrepo.server.security.Authorization
+INFO 2014-09-30 14:45:54.029 [main] (Server) Loading bean definitions for org.fcrepo.server.security.DefaultBackendSecurity impl class=org.fcrepo.server.security.BackendSecurity
+INFO 2014-09-30 14:45:54.034 [main] (Server) Loading bean definitions for org.fcrepo.server.storage.DefaultDOManager impl class=org.fcrepo.server.storage.DOManager
+INFO 2014-09-30 14:45:54.038 [main] (Server) Loading bean definitions for org.fcrepo.server.management.ManagementModule impl class=org.fcrepo.server.management.Management
+INFO 2014-09-30 14:45:54.039 [main] (Server) Loading bean definitions for org.fcrepo.server.access.DefaultAccess impl class=org.fcrepo.server.access.Access
+INFO 2014-09-30 14:45:54.041 [main] (Server) Loading bean definitions for org.fcrepo.server.access.DynamicAccessModule impl class=org.fcrepo.server.access.DynamicAccess
+INFO 2014-09-30 14:45:54.042 [main] (Server) Loading bean definitions for org.fcrepo.server.search.FieldSearchSQLModule impl class=org.fcrepo.server.search.FieldSearch
+INFO 2014-09-30 14:45:54.042 [main] (Server) Loading bean definitions for org.fcrepo.server.resourceIndex.ResourceIndexModule impl class=org.fcrepo.server.resourceIndex.ResourceIndex
+INFO 2014-09-30 14:45:54.043 [main] (Server) Loading bean definitions for org.fcrepo.server.oai.FedoraOAIProviderModule impl class=org.fcrepo.oai.OAIProvider
+INFO 2014-09-30 14:45:54.044 [main] (Server) Loading bean definitions for org.fcrepo.server.storage.translation.DOTranslatorModule impl class=org.fcrepo.server.storage.translation.DOTranslator
+INFO 2014-09-30 14:45:54.045 [main] (Server) Loading bean definitions for org.fcrepo.server.management.BasicPIDGenerator impl class=org.fcrepo.server.management.PIDGenerator
+INFO 2014-09-30 14:45:54.046 [main] (Server) Loading bean definitions for org.fcrepo.server.messaging.MessagingModule impl class=org.fcrepo.server.messaging.Messaging
+INFO 2014-09-30 14:45:54.047 [main] (Server) Loading bean definitions for org.fcrepo.server.storage.ConnectionPoolManagerImpl impl class=org.fcrepo.server.storage.ConnectionPoolManager
+INFO 2014-09-30 14:45:54.048 [main] (Server) Loading bean definitions for org.fcrepo.server.validation.DOValidatorModule impl class=org.fcrepo.server.validation.DOValidator
+INFO 2014-09-30 14:45:54.048 [main] (Server) Loading bean definitions for org.fcrepo.server.storage.DefaultExternalContentManager impl class=org.fcrepo.server.storage.ExternalContentManager
+INFO 2014-09-30 14:45:54.171 [main] (DOValidatorModule) Adding 0 object validators
+INFO 2014-09-30 14:45:54.302 [main] (PolicyFinderModule) Loading repository policies...
+INFO 2014-09-30 14:45:54.306 [main] (PolicyFinderModule) Generating backend policies...
+INFO 2014-09-30 14:45:54.712 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/server/fedora-internal-use/fedora-internal-use-backend-service-policies/callback-by_default.xml
+INFO 2014-09-30 14:45:54.777 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/server/fedora-internal-use/fedora-internal-use-backend-service-policies/callback-by_fedoraInternalCall-1-other-methods.xml
+INFO 2014-09-30 14:45:54.780 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/server/fedora-internal-use/fedora-internal-use-backend-service-policies/callback-by_fedoraInternalCall-2-other-methods.xml
+INFO 2014-09-30 14:45:54.783 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-apim-if-not-localhost.xml
+INFO 2014-09-30 14:45:54.786 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-inactive-or-deleted-objects-or-datastreams-if-not-administrator.xml
+INFO 2014-09-30 14:45:54.789 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-policy-management-if-not-administrator.xml
+INFO 2014-09-30 14:45:54.791 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-purge-datastream-if-active-or-inactive.xml
+INFO 2014-09-30 14:45:54.795 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-purge-object-if-active-or-inactive.xml
+INFO 2014-09-30 14:45:54.798 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-reloadPolicies-if-not-localhost.xml
+INFO 2014-09-30 14:45:54.802 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-unallowed-file-resolution.xml
+INFO 2014-09-30 14:45:54.803 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-anything-to-administrator.xml
+INFO 2014-09-30 14:45:54.805 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-apia-unrestricted.xml
+INFO 2014-09-30 14:45:54.806 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-dsstate-check-unrestricted.xml
+INFO 2014-09-30 14:45:54.808 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-oai-unrestricted.xml
+INFO 2014-09-30 14:45:54.809 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-serverStatus-unrestricted.xml
+INFO 2014-09-30 14:45:54.895 [main] (ResourceIndexModule) Disabled in configuration ( level=0 ), exiting
+INFO 2014-09-30 14:45:55.014 [main] (MessagingModule) Messaging Module is disabled.
+INFO 2014-09-30 14:45:55.488 [main] (Server) Post-Initializing org.fcrepo.server.storage.lowlevel.akubra.AkubraLowlevelStorageModule
+INFO 2014-09-30 14:45:55.488 [main] (Server) Post-Initializing org.fcrepo.server.validation.DOObjectValidatorModule
+INFO 2014-09-30 14:45:55.488 [main] (Server) Post-Initializing org.fcrepo.server.security.DefaultAuthorization
+INFO 2014-09-30 14:45:55.488 [main] (PolicyFinderModule) Loading repository policies...
+INFO 2014-09-30 14:45:55.489 [main] (PolicyFinderModule) Generating backend policies...
+INFO 2014-09-30 14:45:55.530 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/server/fedora-internal-use/fedora-internal-use-backend-service-policies/callback-by_default.xml
+INFO 2014-09-30 14:45:55.532 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/server/fedora-internal-use/fedora-internal-use-backend-service-policies/callback-by_fedoraInternalCall-1-other-methods.xml
+INFO 2014-09-30 14:45:55.535 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/server/fedora-internal-use/fedora-internal-use-backend-service-policies/callback-by_fedoraInternalCall-2-other-methods.xml
+INFO 2014-09-30 14:45:55.537 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-apim-if-not-localhost.xml
+INFO 2014-09-30 14:45:55.540 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-inactive-or-deleted-objects-or-datastreams-if-not-administrator.xml
+INFO 2014-09-30 14:45:55.542 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-policy-management-if-not-administrator.xml
+INFO 2014-09-30 14:45:55.545 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-purge-datastream-if-active-or-inactive.xml
+INFO 2014-09-30 14:45:55.548 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-purge-object-if-active-or-inactive.xml
+INFO 2014-09-30 14:45:55.550 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-reloadPolicies-if-not-localhost.xml
+INFO 2014-09-30 14:45:55.554 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-unallowed-file-resolution.xml
+INFO 2014-09-30 14:45:55.556 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-anything-to-administrator.xml
+INFO 2014-09-30 14:45:55.557 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-apia-unrestricted.xml
+INFO 2014-09-30 14:45:55.559 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-dsstate-check-unrestricted.xml
+INFO 2014-09-30 14:45:55.560 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-oai-unrestricted.xml
+INFO 2014-09-30 14:45:55.561 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-serverStatus-unrestricted.xml
+INFO 2014-09-30 14:45:55.562 [main] (Server) Post-Initializing org.fcrepo.server.security.DefaultBackendSecurity
+INFO 2014-09-30 14:45:55.564 [main] (Server) Post-Initializing org.fcrepo.server.storage.DefaultDOManager
+INFO 2014-09-30 14:45:56.444 [main] (SQLUtilityImpl) Creating new table 'objectPaths' with command(s): 
+CREATE TABLE objectPaths (
+  tokenDbID int NOT NULL GENERATED ALWAYS AS IDENTITY,
+  token varchar(64) UNIQUE NOT NULL DEFAULT '',
+  path varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (tokenDbID));
+INFO 2014-09-30 14:45:56.522 [main] (SQLUtilityImpl) Creating new table 'datastreamPaths' with command(s): 
+CREATE TABLE datastreamPaths (
+  tokenDbID int NOT NULL GENERATED ALWAYS AS IDENTITY,
+  token varchar(199) UNIQUE NOT NULL DEFAULT '',
+  path varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (tokenDbID));
+INFO 2014-09-30 14:45:56.534 [main] (SQLUtilityImpl) Creating new table 'pidGen' with command(s): 
+CREATE TABLE pidGen (
+  namespace varchar(255) NOT NULL,
+  highestID int NOT NULL);
+INFO 2014-09-30 14:45:56.539 [main] (SQLUtilityImpl) Creating new table 'doRegistry' with command(s): 
+CREATE TABLE doRegistry (
+  doPID varchar(64) NOT NULL,
+  systemVersion int NOT NULL DEFAULT 0,
+  ownerId varchar(64),
+  objectState varchar(1) NOT NULL DEFAULT 'A',
+  label varchar(255) DEFAULT '',
+  PRIMARY KEY (doPID));
+INFO 2014-09-30 14:45:56.548 [main] (SQLUtilityImpl) Creating new table 'modelDeploymentMap' with command(s): 
+CREATE TABLE modelDeploymentMap (
+  cModel varchar(64) NOT NULL,
+  sDef varchar(64) NOT NULL,
+  sDep varchar(64) NOT NULL);
+INFO 2014-09-30 14:45:56.553 [main] (SQLUtilityImpl) Creating new table 'doFields' with command(s): 
+CREATE TABLE doFields (
+  pid varchar(64) NOT NULL,
+  label varchar(255),
+  state varchar(1) NOT NULL DEFAULT 'A',
+  ownerId varchar(64),
+  cDate bigint NOT NULL,
+  mDate bigint NOT NULL,
+  dcmDate bigint,
+  dcTitle CLOB,
+  dcCreator CLOB,
+  dcSubject CLOB,
+  dcDescription CLOB,
+  dcPublisher CLOB,
+  dcContributor CLOB,
+  dcDate CLOB,
+  dcType CLOB,
+  dcFormat CLOB,
+  dcIdentifier CLOB,
+  dcSource CLOB,
+  dcLanguage CLOB,
+  dcRelation CLOB,
+  dcCoverage CLOB,
+  dcRights CLOB);
+CREATE INDEX doFields_pid ON doFields (pid);
+INFO 2014-09-30 14:45:56.577 [main] (SQLUtilityImpl) Creating new table 'dcDates' with command(s): 
+CREATE TABLE dcDates (
+  pid varchar(64) NOT NULL,
+  dcDate bigint NOT NULL);
+CREATE INDEX dcDates_pid ON dcDates (pid);
+INFO 2014-09-30 14:45:56.604 [main] (Server) Post-Initializing org.fcrepo.server.management.ManagementModule
+INFO 2014-09-30 14:45:56.620 [main] (Server) Post-Initializing org.fcrepo.server.access.DefaultAccess
+INFO 2014-09-30 14:45:56.620 [main] (Server) Post-Initializing org.fcrepo.server.access.DynamicAccessModule
+INFO 2014-09-30 14:45:56.622 [main] (Server) Post-Initializing org.fcrepo.server.search.FieldSearchSQLModule
+INFO 2014-09-30 14:45:56.623 [main] (Server) Post-Initializing org.fcrepo.server.resourceIndex.ResourceIndexModule
+INFO 2014-09-30 14:45:56.623 [main] (Server) Post-Initializing org.fcrepo.server.oai.FedoraOAIProviderModule
+INFO 2014-09-30 14:45:56.625 [main] (Server) Post-Initializing org.fcrepo.server.storage.translation.DOTranslatorModule
+INFO 2014-09-30 14:45:56.625 [main] (Server) Post-Initializing org.fcrepo.server.management.BasicPIDGenerator
+INFO 2014-09-30 14:45:56.630 [main] (Server) Post-Initializing org.fcrepo.server.messaging.MessagingModule
+INFO 2014-09-30 14:45:56.630 [main] (Server) Post-Initializing org.fcrepo.server.storage.ConnectionPoolManagerImpl
+INFO 2014-09-30 14:45:56.630 [main] (Server) Post-Initializing org.fcrepo.server.validation.DOValidatorModule
+INFO 2014-09-30 14:45:56.631 [main] (Server) Post-Initializing org.fcrepo.server.storage.DefaultExternalContentManager
+INFO 2014-09-30 14:45:56.638 [main] (BasicServer) Ingesting new system object: fedora-system:ContentModel-3.0
+INFO 2014-09-30 14:45:56.947 [main] (DefaultDOManager) Committing addition of fedora-system:ContentModel-3.0
+INFO 2014-09-30 14:45:56.989 [main] (DefaultDOManager) Updating dissemination index for fedora-system:ContentModel-3.0
+INFO 2014-09-30 14:45:56.989 [main] (DefaultDOManager) Updating FieldSearch index
+INFO 2014-09-30 14:45:57.025 [main] (BasicServer) Ingesting new system object: fedora-system:FedoraObject-3.0
+INFO 2014-09-30 14:45:57.110 [main] (DefaultDOManager) Committing addition of fedora-system:FedoraObject-3.0
+INFO 2014-09-30 14:45:57.125 [main] (DefaultDOManager) Updating dissemination index for fedora-system:FedoraObject-3.0
+INFO 2014-09-30 14:45:57.126 [main] (DefaultDOManager) Updating FieldSearch index
+INFO 2014-09-30 14:45:57.132 [main] (BasicServer) Ingesting new system object: fedora-system:ServiceDefinition-3.0
+INFO 2014-09-30 14:45:57.185 [main] (DefaultDOManager) Committing addition of fedora-system:ServiceDefinition-3.0
+INFO 2014-09-30 14:45:57.193 [main] (DefaultDOManager) Updating dissemination index for fedora-system:ServiceDefinition-3.0
+INFO 2014-09-30 14:45:57.193 [main] (DefaultDOManager) Updating FieldSearch index
+INFO 2014-09-30 14:45:57.197 [main] (BasicServer) Ingesting new system object: fedora-system:ServiceDeployment-3.0
+INFO 2014-09-30 14:45:57.268 [main] (DefaultDOManager) Committing addition of fedora-system:ServiceDeployment-3.0
+INFO 2014-09-30 14:45:57.280 [main] (DefaultDOManager) Updating dissemination index for fedora-system:ServiceDeployment-3.0
+INFO 2014-09-30 14:45:57.280 [main] (DefaultDOManager) Updating FieldSearch index
+INFO 2014-09-30 14:45:57.283 [main] (Server) Server startup complete
+INFO 2014-09-30 14:45:59.344 [main] (AuthFilterJAAS) using FEDORA_HOME: /Users/cam156/worthwhile_demo/jetty/fedora/test
+INFO 2014-09-30 14:45:59.345 [main] (AuthFilterJAAS) initialised servlet filter: org.fcrepo.server.security.jaas.AuthFilterJAAS
+INFO 2015-03-27 11:23:20.967 [main] (LogSetupContextListener) Configured Fedora Logback system with config file from: /Users/cam156/worthwhile_demo/jetty/fedora/test/server/config/logback.xml
+INFO 2015-03-27 11:23:21.706 [main] (Server) Registered server at /Users/cam156/worthwhile_demo/jetty/fedora/test/server
+INFO 2015-03-27 11:23:21.709 [main] (Server) loading spring beans from /Users/cam156/worthwhile_demo/jetty/fedora/test/server/config/spring/akubra-llstore.xml
+INFO 2015-03-27 11:23:21.735 [main] (Server) loading spring beans from /Users/cam156/worthwhile_demo/jetty/fedora/test/server/config/spring/doobjectvalidator.xml
+INFO 2015-03-27 11:23:21.748 [main] (Server) loading spring beans from /Users/cam156/worthwhile_demo/jetty/fedora/test/server/config/spring/doreader-cache.xml
+INFO 2015-03-27 11:23:21.759 [main] (Server) loading spring beans from /Users/cam156/worthwhile_demo/jetty/fedora/test/server/config/spring/policy-enforcement.xml
+INFO 2015-03-27 11:23:21.783 [main] (Server) loading spring beans from /Users/cam156/worthwhile_demo/jetty/fedora/test/server/config/spring/triple-generator.xml
+INFO 2015-03-27 11:23:21.797 [main] (Server) Server home is /Users/cam156/worthwhile_demo/jetty/fedora/test/server
+INFO 2015-03-27 11:23:21.808 [main] (BasicServer) Fedora Version: 3.7.0
+INFO 2015-03-27 11:23:21.808 [main] (BasicServer) Fedora Build Date: 2013-09-14 01:09:27 UTC-0400
+INFO 2015-03-27 11:23:21.810 [main] (Server) Loading fcfg datastore definitions for localMySQLPool
+INFO 2015-03-27 11:23:21.810 [main] (Server) Loading fcfg datastore definitions for localDerbyPool
+INFO 2015-03-27 11:23:21.810 [main] (Server) Loading fcfg datastore definitions for localOraclePool
+INFO 2015-03-27 11:23:21.810 [main] (Server) Loading fcfg datastore definitions for localPostgreSQLPool
+INFO 2015-03-27 11:23:21.810 [main] (Server) Loading fcfg datastore definitions for localMulgaraTriplestore
+INFO 2015-03-27 11:23:21.810 [main] (Server) Loading fcfg datastore definitions for localPostgresMPTTriplestore
+INFO 2015-03-27 11:23:21.810 [main] (Server) Loading fcfg datastore definitions for apimUpdateMessages
+INFO 2015-03-27 11:23:21.810 [main] (Server) Loading fcfg datastore definitions for apimAccessMessages
+INFO 2015-03-27 11:23:21.811 [main] (Server) Loading bean definitions for org.fcrepo.server.security.DefaultAuthorization impl class=org.fcrepo.server.security.Authorization
+INFO 2015-03-27 11:23:21.813 [main] (Server) Loading bean definitions for org.fcrepo.server.security.DefaultBackendSecurity impl class=org.fcrepo.server.security.BackendSecurity
+INFO 2015-03-27 11:23:21.814 [main] (Server) Loading bean definitions for org.fcrepo.server.storage.DefaultDOManager impl class=org.fcrepo.server.storage.DOManager
+INFO 2015-03-27 11:23:21.816 [main] (Server) Loading bean definitions for org.fcrepo.server.management.ManagementModule impl class=org.fcrepo.server.management.Management
+INFO 2015-03-27 11:23:21.817 [main] (Server) Loading bean definitions for org.fcrepo.server.access.DefaultAccess impl class=org.fcrepo.server.access.Access
+INFO 2015-03-27 11:23:21.818 [main] (Server) Loading bean definitions for org.fcrepo.server.access.DynamicAccessModule impl class=org.fcrepo.server.access.DynamicAccess
+INFO 2015-03-27 11:23:21.819 [main] (Server) Loading bean definitions for org.fcrepo.server.search.FieldSearchSQLModule impl class=org.fcrepo.server.search.FieldSearch
+INFO 2015-03-27 11:23:21.819 [main] (Server) Loading bean definitions for org.fcrepo.server.resourceIndex.ResourceIndexModule impl class=org.fcrepo.server.resourceIndex.ResourceIndex
+INFO 2015-03-27 11:23:21.820 [main] (Server) Loading bean definitions for org.fcrepo.server.oai.FedoraOAIProviderModule impl class=org.fcrepo.oai.OAIProvider
+INFO 2015-03-27 11:23:21.821 [main] (Server) Loading bean definitions for org.fcrepo.server.storage.translation.DOTranslatorModule impl class=org.fcrepo.server.storage.translation.DOTranslator
+INFO 2015-03-27 11:23:21.822 [main] (Server) Loading bean definitions for org.fcrepo.server.management.BasicPIDGenerator impl class=org.fcrepo.server.management.PIDGenerator
+INFO 2015-03-27 11:23:21.822 [main] (Server) Loading bean definitions for org.fcrepo.server.messaging.MessagingModule impl class=org.fcrepo.server.messaging.Messaging
+INFO 2015-03-27 11:23:21.823 [main] (Server) Loading bean definitions for org.fcrepo.server.storage.ConnectionPoolManagerImpl impl class=org.fcrepo.server.storage.ConnectionPoolManager
+INFO 2015-03-27 11:23:21.824 [main] (Server) Loading bean definitions for org.fcrepo.server.validation.DOValidatorModule impl class=org.fcrepo.server.validation.DOValidator
+INFO 2015-03-27 11:23:21.825 [main] (Server) Loading bean definitions for org.fcrepo.server.storage.DefaultExternalContentManager impl class=org.fcrepo.server.storage.ExternalContentManager
+INFO 2015-03-27 11:23:21.949 [main] (DOValidatorModule) Adding 0 object validators
+INFO 2015-03-27 11:23:22.106 [main] (PolicyFinderModule) Loading repository policies...
+INFO 2015-03-27 11:23:22.106 [main] (PolicyFinderModule) Generating backend policies...
+INFO 2015-03-27 11:23:22.463 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/server/fedora-internal-use/fedora-internal-use-backend-service-policies/callback-by_default.xml
+INFO 2015-03-27 11:23:22.545 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/server/fedora-internal-use/fedora-internal-use-backend-service-policies/callback-by_fedoraInternalCall-1-other-methods.xml
+INFO 2015-03-27 11:23:22.548 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/server/fedora-internal-use/fedora-internal-use-backend-service-policies/callback-by_fedoraInternalCall-2-other-methods.xml
+INFO 2015-03-27 11:23:22.550 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-apim-if-not-localhost.xml
+INFO 2015-03-27 11:23:22.553 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-inactive-or-deleted-objects-or-datastreams-if-not-administrator.xml
+INFO 2015-03-27 11:23:22.556 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-policy-management-if-not-administrator.xml
+INFO 2015-03-27 11:23:22.558 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-purge-datastream-if-active-or-inactive.xml
+INFO 2015-03-27 11:23:22.561 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-purge-object-if-active-or-inactive.xml
+INFO 2015-03-27 11:23:22.564 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-reloadPolicies-if-not-localhost.xml
+INFO 2015-03-27 11:23:22.567 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-unallowed-file-resolution.xml
+INFO 2015-03-27 11:23:22.569 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-anything-to-administrator.xml
+INFO 2015-03-27 11:23:22.571 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-apia-unrestricted.xml
+INFO 2015-03-27 11:23:22.573 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-dsstate-check-unrestricted.xml
+INFO 2015-03-27 11:23:22.575 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-oai-unrestricted.xml
+INFO 2015-03-27 11:23:22.576 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-serverStatus-unrestricted.xml
+INFO 2015-03-27 11:23:22.686 [main] (ResourceIndexModule) Disabled in configuration ( level=0 ), exiting
+INFO 2015-03-27 11:23:22.847 [main] (MessagingModule) Messaging Module is disabled.
+INFO 2015-03-27 11:23:23.073 [main] (Server) Post-Initializing org.fcrepo.server.storage.lowlevel.akubra.AkubraLowlevelStorageModule
+INFO 2015-03-27 11:23:23.073 [main] (Server) Post-Initializing org.fcrepo.server.validation.DOObjectValidatorModule
+INFO 2015-03-27 11:23:23.073 [main] (Server) Post-Initializing org.fcrepo.server.security.DefaultAuthorization
+INFO 2015-03-27 11:23:23.073 [main] (PolicyFinderModule) Loading repository policies...
+INFO 2015-03-27 11:23:23.074 [main] (PolicyFinderModule) Generating backend policies...
+INFO 2015-03-27 11:23:23.123 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/server/fedora-internal-use/fedora-internal-use-backend-service-policies/callback-by_default.xml
+INFO 2015-03-27 11:23:23.128 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/server/fedora-internal-use/fedora-internal-use-backend-service-policies/callback-by_fedoraInternalCall-1-other-methods.xml
+INFO 2015-03-27 11:23:23.130 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/server/fedora-internal-use/fedora-internal-use-backend-service-policies/callback-by_fedoraInternalCall-2-other-methods.xml
+INFO 2015-03-27 11:23:23.133 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-apim-if-not-localhost.xml
+INFO 2015-03-27 11:23:23.135 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-inactive-or-deleted-objects-or-datastreams-if-not-administrator.xml
+INFO 2015-03-27 11:23:23.138 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-policy-management-if-not-administrator.xml
+INFO 2015-03-27 11:23:23.139 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-purge-datastream-if-active-or-inactive.xml
+INFO 2015-03-27 11:23:23.142 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-purge-object-if-active-or-inactive.xml
+INFO 2015-03-27 11:23:23.144 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-reloadPolicies-if-not-localhost.xml
+INFO 2015-03-27 11:23:23.146 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/deny-unallowed-file-resolution.xml
+INFO 2015-03-27 11:23:23.147 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-anything-to-administrator.xml
+INFO 2015-03-27 11:23:23.148 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-apia-unrestricted.xml
+INFO 2015-03-27 11:23:23.149 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-dsstate-check-unrestricted.xml
+INFO 2015-03-27 11:23:23.150 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-oai-unrestricted.xml
+INFO 2015-03-27 11:23:23.152 [main] (SimplePolicyLoader) Loading policy: /Users/cam156/worthwhile_demo/jetty/fedora/test/data/fedora-xacml-policies/repository-policies/default/permit-serverStatus-unrestricted.xml
+INFO 2015-03-27 11:23:23.153 [main] (Server) Post-Initializing org.fcrepo.server.security.DefaultBackendSecurity
+INFO 2015-03-27 11:23:23.155 [main] (Server) Post-Initializing org.fcrepo.server.storage.DefaultDOManager
+INFO 2015-03-27 11:23:23.811 [main] (Server) Post-Initializing org.fcrepo.server.management.ManagementModule
+INFO 2015-03-27 11:23:23.823 [main] (Server) Post-Initializing org.fcrepo.server.access.DefaultAccess
+INFO 2015-03-27 11:23:23.824 [main] (Server) Post-Initializing org.fcrepo.server.access.DynamicAccessModule
+INFO 2015-03-27 11:23:23.826 [main] (Server) Post-Initializing org.fcrepo.server.search.FieldSearchSQLModule
+INFO 2015-03-27 11:23:23.828 [main] (Server) Post-Initializing org.fcrepo.server.resourceIndex.ResourceIndexModule
+INFO 2015-03-27 11:23:23.828 [main] (Server) Post-Initializing org.fcrepo.server.oai.FedoraOAIProviderModule
+INFO 2015-03-27 11:23:23.831 [main] (Server) Post-Initializing org.fcrepo.server.storage.translation.DOTranslatorModule
+INFO 2015-03-27 11:23:23.831 [main] (Server) Post-Initializing org.fcrepo.server.management.BasicPIDGenerator
+INFO 2015-03-27 11:23:23.839 [main] (Server) Post-Initializing org.fcrepo.server.messaging.MessagingModule
+INFO 2015-03-27 11:23:23.839 [main] (Server) Post-Initializing org.fcrepo.server.storage.ConnectionPoolManagerImpl
+INFO 2015-03-27 11:23:23.839 [main] (Server) Post-Initializing org.fcrepo.server.validation.DOValidatorModule
+INFO 2015-03-27 11:23:23.840 [main] (Server) Post-Initializing org.fcrepo.server.storage.DefaultExternalContentManager
+INFO 2015-03-27 11:23:23.859 [main] (Server) Server startup complete
+INFO 2015-03-27 11:23:26.104 [main] (AuthFilterJAAS) using FEDORA_HOME: /Users/cam156/worthwhile_demo/jetty/fedora/test
+INFO 2015-03-27 11:23:26.105 [main] (AuthFilterJAAS) initialised servlet filter: org.fcrepo.server.security.jaas.AuthFilterJAAS

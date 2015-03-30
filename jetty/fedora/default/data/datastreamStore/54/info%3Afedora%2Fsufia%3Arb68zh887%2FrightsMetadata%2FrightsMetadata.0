@@ -1,0 +1,29 @@
+<rightsMetadata xmlns="http://hydra-collab.stanford.edu/schemas/rightsMetadata/v1" version="0.1">
+  <copyright>
+    <human type="title"/>
+    <human type="description"/>
+    <machine type="uri"/>
+  </copyright>
+  <access type="discover">
+    <human/>
+    <machine/>
+  </access>
+  <access type="read">
+    <human/>
+    <machine>
+      <group>public</group>
+    </machine>
+  </access>
+  <access type="edit">
+    <human/>
+    <machine>
+      <person>cam@psu.edu</person>
+    </machine>
+  </access>
+  <embargo>
+    <machine/>
+  </embargo>
+  <lease>
+    <machine/>
+  </lease>
+</rightsMetadata>
